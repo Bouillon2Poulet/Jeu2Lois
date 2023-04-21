@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include "internal.h"
+#include "loi2proba.h"
 #include "p6/p6.h"
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest/doctest.h"
@@ -25,6 +27,9 @@ int main(int argc, char* argv[])
             p6::Center{ctx.mouse()},
             p6::Radius{0.2f}
         );
+        // std::cout << X1(9) << std::endl;
+        // std::cout << fact(5) << std::endl;
+        std::cout << X2(2.5) << std::endl;
     };
 
     // Should be done last. It starts the infinite loop.
