@@ -8,7 +8,13 @@
 enum class lawType {
     uniform,
     poisson,
+    SIZE,
 };
+
+inline lawType randomLawType()
+{
+    return static_cast<lawType>((int)p6::random::number((float)lawType::SIZE));
+}
 
 inline unsigned int X1(const unsigned int max)
 {

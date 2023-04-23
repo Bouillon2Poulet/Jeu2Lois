@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include "Map.h"
 #include "internal.h"
 #include "loi2proba.h"
 #include "p6/p6.h"
@@ -20,16 +21,17 @@ int main(int argc, char* argv[])
     auto ctx = p6::Context{{.title = "Simple-p6-Setup"}};
     ctx.maximize_window();
 
+    Map map(ctx.aspect_ratio());
+
     // Declare your infinite update loop.
     ctx.update = [&]() {
-        ctx.background(p6::NamedColor::Blue);
-        ctx.circle(
-            p6::Center{ctx.mouse()},
-            p6::Radius{0.2f}
-        );
+        ctx.background(p6::Color(39, 110, 188));
+        map.update(ctx);
+        map.draw(ctx);
         // std::cout << X1(9) << std::endl;
         // std::cout << fact(5) << std::endl;
-        std::cout << X2(2.5) << std::endl;
+        // std::cout
+        //     << X2(2.5) << std::endl;
     };
 
     // Should be done last. It starts the infinite loop.

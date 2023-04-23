@@ -48,3 +48,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(p6)
 target_link_libraries(${PROJECT_NAME} PRIVATE p6::p6)
+
+#Image
+p6_copy_folder(${PROJECT_NAME} img)
