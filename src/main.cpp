@@ -23,11 +23,14 @@ int main(int argc, char* argv[])
 
     Map map(ctx.aspect_ratio());
 
+    p6::Image IMGgoose = p6::load_image("img/goosegame.jpeg");
+
     // Declare your infinite update loop.
     ctx.update = [&]() {
-        ctx.background(p6::Color(39, 110, 188));
-        map.update(ctx);
+        ctx.background(p6::Color(39.f/255.f, 110.f/255.f, 188.F/255.f));
+        ctx.image(IMGgoose, p6::Center(-ctx.aspect_ratio() / 2.8f, 0.05), p6::RadiusX(p6::RadiusX().value - 0.2f), p6::Rotation());
         map.draw(ctx);
+        map.update(ctx);
         // std::cout << X1(9) << std::endl;
         // std::cout << fact(5) << std::endl;
         // std::cout

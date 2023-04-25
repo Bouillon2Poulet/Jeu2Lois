@@ -7,14 +7,18 @@ private:
     p6::Radii   _size = p6::Radii(.2, .1);
     std::string _text;
     glm::vec2   _position;
+    // float       _lastTimeClicked;
+    bool _canBeClicked = true;
 
 public:
     inline bool mouseIsOnButton(const glm::vec2& mousePosition)
     {
         if (mousePosition.y < _position.y + _size.value.y / 2 && mousePosition.y > _position.y - _size.value.y / 2)
         {
-            if (mousePosition.x < _position.y + _size.value.x / 2 && mousePosition.x > _position.y - _size.value.x / 2)
+            //std::cout << "!!";
+            if (mousePosition.x < _position.x + _size.value.x / 2 && mousePosition.x > _position.x - _size.value.x / 2)
             {
+                //std::cout << "??";
                 return true;
             }
         }
@@ -22,10 +26,23 @@ public:
     }
     inline bool isClicked(p6::Context& ctx)
     {
-        if (ctx.mouse_button_is_pressed(p6::Button(0)) && mouseIsOnButton(ctx.mouse()))
+        //std::cout << _canBeClicked << "\n";
+        if (_canBeClicked)
         {
-            std::cout << "Button Clicked\n";
-            return true;
+            if (ctx.mouse_button_is_pressed(p6::Button(0)) && mouseIsOnButton(ctx.mouse()))
+            {
+                //std::cout << "Button Clicked\n";
+                _canBeClicked = false;
+                return true;
+            }
+        }
+        if (!_canBeClicked) // RELEASE
+        {
+            if (!ctx.mouse_button_is_pressed(p6::Button(0)))
+            {
+                //std::cout << "!!" << std::endl;
+                _canBeClicked = true;
+            }
         }
         return false;
     }
