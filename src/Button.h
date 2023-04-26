@@ -4,9 +4,8 @@
 
 class Button {
 private:
-    p6::Radii   _size = p6::Radii(.2, .1);
-    std::string _text;
-    glm::vec2   _position;
+    p6::Radii _size = p6::Radii(.2, .1);
+    glm::vec2 _position{};
     // float       _lastTimeClicked;
     bool _canBeClicked = true;
 
@@ -15,10 +14,10 @@ public:
     {
         if (mousePosition.y < _position.y + _size.value.y / 2 && mousePosition.y > _position.y - _size.value.y / 2)
         {
-            //std::cout << "!!";
+            // std::cout << "!!";
             if (mousePosition.x < _position.x + _size.value.x / 2 && mousePosition.x > _position.x - _size.value.x / 2)
             {
-                //std::cout << "??";
+                // std::cout << "??";
                 return true;
             }
         }
@@ -26,12 +25,12 @@ public:
     }
     inline bool isClicked(p6::Context& ctx)
     {
-        //std::cout << _canBeClicked << "\n";
+        // std::cout << _canBeClicked << "\n";
         if (_canBeClicked)
         {
             if (ctx.mouse_button_is_pressed(p6::Button(0)) && mouseIsOnButton(ctx.mouse()))
             {
-                //std::cout << "Button Clicked\n";
+                // std::cout << "Button Clicked\n";
                 _canBeClicked = false;
                 return true;
             }
@@ -40,17 +39,16 @@ public:
         {
             if (!ctx.mouse_button_is_pressed(p6::Button(0)))
             {
-                //std::cout << "!!" << std::endl;
+                // std::cout << "!!" << std::endl;
                 _canBeClicked = true;
             }
         }
         return false;
     }
 
-    inline Button(const std::string text, const glm::vec2& position)
-        : _text(text), _position(position) {}
+    inline Button() = default;
 
-    inline void draw(p6::Context& ctx) const
+    inline void draw(p6::Context& ctx, std::string text) const
     {
         ctx.fill       = p6::NamedColor::Arsenic;
         ctx.use_stroke = true;
@@ -62,7 +60,7 @@ public:
 
         ctx.fill = p6::NamedColor::White;
         ctx.text(
-            to_u16string(_text),
+            to_u16string(text),
             p6::Center(_position),
             p6::Rotation()
         );

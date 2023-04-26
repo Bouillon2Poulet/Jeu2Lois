@@ -7,6 +7,7 @@
 #include "Console.h"
 #include "Player.h"
 #include "UI.h"
+#include "drawing.h"
 #include "globalVariable.h"
 #include "internal.h"
 #include "loi2proba.h"
@@ -18,8 +19,8 @@ private:
     // Button              _test;
     float _caseWidth = .17f;
     // float               _marging   = 1.f;
-    unsigned int        _indexCurrentPlayer;
-    std::vector<Button> _des = {Button("De1", {0, 0}), Button("De2", {0.7, .7})};
+    unsigned int _indexCurrentPlayer;
+    Button       _de{};
 
     UI      _ui{};
     Console _console{};
@@ -68,6 +69,8 @@ public:
             playerIndex++;
         }
 
+        drawBorders(ctx);
+
         _ui.draw(ctx, _players, _indexCurrentPlayer);
 
         _console.draw(ctx);
@@ -75,12 +78,18 @@ public:
 
     inline void update(p6::Context& ctx)
     {
-        Console::addMessage(std::pair<std::string, p6::Color>("Tour du joueur " + std::to_string(_indexCurrentPlayer + 1) + " :", p6::NamedColor::White));
-        if (_players[_indexCurrentPlayer].update(ctx, _cases, _caseWidth, _des))
+        Console::addMessage(std::pair<std::string, p6::Color>("Tour du joueur " + std::to_string(_indexCurrentPlayer + 1) + " - ", _players[_indexCurrentPlayer].color()));
+        _players[_indexCurrentPlayer].update(ctx, _cases, _caseWidth, _de);
+        if (Win::_hasWin.first)
+        {
+            displayVictoryScreen(ctx, Win::_hasWin.second);
+        }
+        if (Turn::_endOfTurn)
         {
             Console::needToBeUpdated(true);
-            Console::addMessage(std::pair<std::string, p6::Color>("/////////////", p6::NamedColor::White));
+            Console::addMessage(std::pair<std::string, p6::Color>("", p6::NamedColor::White));
             nextPlayer();
+            Turn::_endOfTurn = false;
         }
     }
 
@@ -92,4 +101,41 @@ public:
             _indexCurrentPlayer = 0;
         }
     }
+
+    static inline void drawBorders(p6::Context& ctx)
+    {
+        glm::vec2              A(-1.67, -.715);
+        glm::vec2              B(0.02, -.715);
+        std::vector<glm::vec2> direction  = {{1., 0}, {0, 1}, {-1, 0}, {0, -1}};
+        float                  baseLength = glm::length(B - A);
+        std::vector<float>     length     = {baseLength * 0.805f, baseLength * 0.805f, baseLength * 0.705f, baseLength * 0.705f, baseLength * 0.605f, baseLength * 0.605f, baseLength * 0.502f, baseLength * 0.502f, baseLength * 0.4f, baseLength * 0.2f, 0};
+        ctx.use_stroke                    = true;
+        ctx.stroke                        = p6::NamedColor::Black;
+        for (int i = 0; i < 11; i++)
+        {
+            ctx.line(A, B);
+            // float length = glm::length(B - A);
+            A = B;
+            // float factor = (i % 2 == 0) ? 0.82f : 1.f;
+            B = A + length[i] * direction[(i + 1) % 4];
+        }
+
+        A          = glm::vec2(-1.67, -.88);
+        B          = glm::vec2(0.18, -.88);
+        baseLength = glm::length(B - A);
+        length     = {baseLength * 0.915f, baseLength * 0.915f, baseLength * 0.825f, 0};
+        for (int i = 0; i < 4; i++)
+        {
+            ctx.line(A, B);
+            // float length = glm::length(B - A);
+            A = B;
+            // float factor = (i % 2 == 0) ? 0.82f : 1.f;
+            B = A + length[i] * direction[(i + 1) % 4];
+        }
+    }
+
+    // static inline void endOfTurn(bool value)
+    // {
+    //     _endOfTurn = value;
+    // }
 };

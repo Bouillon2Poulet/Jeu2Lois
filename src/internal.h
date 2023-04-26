@@ -66,3 +66,9 @@ glm::vec2 indexToVector(unsigned int index)
         return glm::vec2(-1.f, 0.f);
     }
 }
+
+template<typename T>
+inline constexpr int sign(T val)
+{
+    return (T{0} <= val) - (val < T{0});
+}

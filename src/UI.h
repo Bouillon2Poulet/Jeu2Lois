@@ -79,7 +79,7 @@ public:
                 p6::Radius(0.05)
             );
             ctx.use_fill   = true;
-            ctx.use_stroke = false;
+            // ctx.use_stroke = false;
         }
 
         ctx.text_size = 0.025f;

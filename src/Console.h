@@ -21,6 +21,20 @@ public:
         _messages.push_back(message);
     }
 
+    inline static void addToLastMessage(std::string msg)
+    {
+        if (!_needToBeUpdated)
+            return;
+        _messages.back().first += msg;
+    }
+
+    inline static void deleteLastMessage()
+    {
+        if (!_needToBeUpdated)
+            return;
+        _messages.pop_back();
+    }
+
     inline void draw(p6::Context& ctx)
     {
         drawWindow(ctx);
@@ -49,14 +63,15 @@ public:
     inline void drawMessages(p6::Context& ctx)
     {
         // std::cout<<
-        ctx.text_size = 0.02f;
+        ctx.text_size = 0.015f;
         int count     = 0;
-        for (int i = _messages.size() - 1; i >= std::max(0, (int)_messages.size() - 8); i--)
+        for (int i = _messages.size() - 1; i >= std::max(0, (int)_messages.size() - 30); i--)
         {
-            ctx.fill = _messages[i].second;
+            if (!isWhite(_messages[i].second))
+                ctx.fill = _messages[i].second;
             ctx.text(
                 to_u16string(_messages[i].first),
-                p6::BottomLeftCorner(glm::vec2((ctx.aspect_ratio() / 2.f) - 0.45, -0.85) + (float)count * glm::vec2(0, 0.08)),
+                p6::BottomLeftCorner(glm::vec2((ctx.aspect_ratio() / 2.f) - 0.45, -0.85) + (float)count * glm::vec2(0, 0.04)),
                 p6::Rotation()
             );
             count++;
@@ -76,6 +91,21 @@ public:
     inline static std::string lastMessage()
     {
         return _messages.back().first;
+    }
+
+    inline bool isWhite(p6::Color color)
+    {
+        if (color.r() == 0)
+        {
+            if (color.g() == 0)
+            {
+                if (color.b() == 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 };
 
