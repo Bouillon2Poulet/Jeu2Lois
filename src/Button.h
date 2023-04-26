@@ -6,6 +6,7 @@ class Button {
 private:
     p6::Radii _size = p6::Radii(.2, .1);
     glm::vec2 _position{};
+    p6::Color _color = p6::NamedColor::Black;
     // float       _lastTimeClicked;
     bool _canBeClicked = true;
 
@@ -48,9 +49,22 @@ public:
 
     inline Button() = default;
 
+    inline Button(p6::Radii size, p6::Color _color)
+        : _size(size), _color(_color)
+    {
+    }
+
+    inline Button(glm::vec2 position)
+        : _position(position){};
+
+    inline void position(glm::vec2 position)
+    {
+        _position = position;
+    }
+
     inline void draw(p6::Context& ctx, std::string text) const
     {
-        ctx.fill       = p6::NamedColor::Arsenic;
+        ctx.fill       = _color;
         ctx.use_stroke = true;
         ctx.rectangle(
             p6::Center(_position),
