@@ -1,5 +1,5 @@
 #pragma once
-#include <corecrt_math.h>
+//#include <corecrt_math.h>
 #include <cmath>
 #include <string>
 #include <utility>
@@ -11,7 +11,7 @@
 #include "p6/p6.h"
 
 enum class lawType {
-    uniform,
+    uniforme,
     poisson,
     normale,
     bernoulli,
@@ -27,8 +27,8 @@ inline std::string lawTypeToString(lawType type)
 {
     switch (type)
     {
-    case lawType::uniform:
-        return "uniform";
+    case lawType::uniforme:
+        return "uniforme";
     case lawType::poisson:
         return "poisson";
     case lawType::normale:
@@ -89,6 +89,7 @@ inline int X2(const float lambda) // AUTO
 
 inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // TODO : 2 lancés de dé
 {
+    /*
     Console::addMessage(std::pair<std::string, p6::Color>("Veuillez lance 2 fois le de", p6::NamedColor::White));
 
     de.draw(ctx, "2 de");
@@ -98,6 +99,7 @@ inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // TODO
     }
     Console::needToBeUpdated(true);
 
+
     int u1 = (p6::random::number(1, 7));
     int u2 = (p6::random::number(1, 7));
     diceRolls.push_back(u1);
@@ -105,7 +107,16 @@ inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // TODO
     diceRolls.push_back(u2);
     Console::addMessage(std::pair<std::string, p6::Color>("Resultat 2 :" + std::to_string(diceRolls.back()), p6::NamedColor::White));
     Console::needToBeUpdated(false);
-    return diceRolls.back();
+    //return diceRolls.back();
+*/
+    Console::needToBeUpdated(true);
+    Console::addMessage(std::pair<std::string, p6::Color>("(NORMALE : AUTOMATIQUE)", p6::NamedColor::White));
+
+
+    // Génération de deux nombres aléatoires indépendants suivant une loi uniforme sur ]0,1[
+    float u1 = p6::random::number() + std::numeric_limits<float>::epsilon();
+    float u2 = p6::random::number();
+    Console::needToBeUpdated(false);
 
     float mu    = 0.f;
     float sigma = 3.f;
@@ -275,7 +286,7 @@ int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<in
 
     switch (type)
     {
-    case lawType::uniform: // DÉ
+    case lawType::uniforme: // DÉ
         return X1(ctx, de, diceRolls);
         break;
     case lawType::poisson: // AUTOMATIQUE
@@ -288,7 +299,7 @@ int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<in
         return X4(ctx, de);
         break;
     case lawType::student:
-        return X5(5.f, 0, 3.f);
+        return X5(10.f, 0, 3.f);
         break;
     case lawType::geometrique:
         return X6(ctx, de, X6LawFailsCount);
@@ -308,7 +319,7 @@ bool lawTypeToEndOfTurn(lawType type)
 {
     switch (type)
     {
-    case lawType::uniform:
+    case lawType::uniforme:
         return true;
     case lawType::poisson:
         return false;

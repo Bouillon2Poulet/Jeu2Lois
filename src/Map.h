@@ -35,7 +35,7 @@ public:
         for (unsigned int i = 0; i < MAPnbCases(); i++)
         {
             if (i == 0)
-                _cases.emplace_back(casePosition, lawType::uniform);
+                _cases.emplace_back(casePosition, lawType::uniforme);
             else
                 _cases.emplace_back(casePosition, randomLawType());
 

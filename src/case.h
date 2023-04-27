@@ -17,7 +17,7 @@ public:
         switch (_type)
         {
         case lawType::poisson: _color = p6::NamedColor::Blue; break;
-        case lawType::uniform: _color = p6::NamedColor::Yellow; break;
+        case lawType::uniforme: _color = p6::NamedColor::Yellow; break;
         case lawType::normale: _color = p6::NamedColor::GreenYellow; break;
         case lawType::bernoulli: _color = p6::NamedColor::PaleGreen; break;
         case lawType::student: _color = p6::NamedColor::BurntOrange; break;

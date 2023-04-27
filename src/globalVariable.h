@@ -7,13 +7,13 @@ unsigned int MAPnbCases()
     return 78;
 }
 
-static struct Turn {
+struct Turn {
     static bool _endOfTurn;
 };
 
 bool Turn::_endOfTurn = false;
 
-static struct Win {
+struct Win {
     static std::pair<bool, int> _hasWin;
 };
 

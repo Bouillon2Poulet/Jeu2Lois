@@ -1,0 +1,391 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "_deps/doctest-build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.doctest-build-Debug-770be0380ae97348b8c7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "cmake-build-debug/_deps/doctest-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/p6-build",
+					"childIndexes" : 
+					[
+						3,
+						7,
+						8,
+						9,
+						10
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.p6-build-Debug-4ff56b301c4cc13fc011.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "cmake-build-debug/_deps/p6-src",
+					"targetIndexes" : 
+					[
+						0,
+						9
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended",
+					"childIndexes" : 
+					[
+						4,
+						5
+					],
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended-Debug-efb68a838a03c9add658.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/glpp-extended",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended/lib/glpp",
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended.lib.glpp-Debug-ec90f3f2826922c6cb08.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 0,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/glpp-extended/lib/glpp",
+					"targetIndexes" : 
+					[
+						4,
+						6
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended/lib/glm",
+					"childIndexes" : 
+					[
+						6
+					],
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended.lib.glm-Debug-289843affc0d4229d331.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/glpp-extended/lib/glm",
+					"targetIndexes" : 
+					[
+						11
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended/lib/glm/glm",
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended.lib.glm.glm-Debug-fbeb0d2af9327dd50d8c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 2,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/glpp-extended/lib/glm/glm"
+				},
+				{
+					"build" : "_deps/p6-build/third-party/img",
+					"jsonFile" : "directory-_deps.p6-build.third-party.img-Debug-fed64f401a396149572f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/img",
+					"targetIndexes" : 
+					[
+						8,
+						10
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/op",
+					"jsonFile" : "directory-_deps.p6-build.third-party.op-Debug-66cdd92164d0f3967cfa.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/op"
+				},
+				{
+					"build" : "_deps/p6-build/third-party/exe_path",
+					"jsonFile" : "directory-_deps.p6-build.third-party.exe_path-Debug-c022cc9b77c41bd4b281.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/exe_path",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glfw",
+					"childIndexes" : 
+					[
+						11
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.p6-build.third-party.glfw-Debug-d7058d4bd26bd15032cc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 3,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/glfw"
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glfw/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.p6-build.third-party.glfw.src-Debug-6eb81a5ae60df2a54806.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 3,
+					"source" : "cmake-build-debug/_deps/p6-src/third-party/glfw/src",
+					"targetIndexes" : 
+					[
+						5,
+						12
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2,
+						3,
+						4,
+						7,
+						8,
+						9
+					],
+					"name" : "Simple-p6-Setup",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						3,
+						4,
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "doctest",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5,
+						6
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						10,
+						11
+					],
+					"name" : "GLFW",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						5,
+						12
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "ImGui::@858a43b5fb96714b8280",
+					"jsonFile" : "target-ImGui-Debug-1c6d68eac3fe2b25a889.json",
+					"name" : "ImGui",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Simple-p6-Setup::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Simple-p6-Setup-Debug-9aced88173de6b2c51e6.json",
+					"name" : "Simple-p6-Setup",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "doctest_with_main::@de8c2d1415f8a28c2e63",
+					"jsonFile" : "target-doctest_with_main-Debug-38ea36dea5f95f904b59.json",
+					"name" : "doctest_with_main",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "exe_path::@a63eedd348096de52d98",
+					"jsonFile" : "target-exe_path-Debug-6c3c1e5a543f5f91932a.json",
+					"name" : "exe_path",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glad::@e5d7c760eca4eac2409f",
+					"jsonFile" : "target-glad-Debug-1bdcfb17a6ea111d6072.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "glfw::@562e2781b72b6260148b",
+					"jsonFile" : "target-glfw-Debug-968471238f9c217e3d2d.json",
+					"name" : "glfw",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glpp::@e5d7c760eca4eac2409f",
+					"jsonFile" : "target-glpp-Debug-1354595ae8c133f6d820.json",
+					"name" : "glpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "glpp-extended::@4e084f835e3ce032d937",
+					"jsonFile" : "target-glpp-extended-Debug-6f74383607409b01eddf.json",
+					"name" : "glpp-extended",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "img::@36c20e18dd9565886a38",
+					"jsonFile" : "target-img-Debug-e744e0451273ce7a45b0.json",
+					"name" : "img",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "p6::@858a43b5fb96714b8280",
+					"jsonFile" : "target-p6-Debug-e01b12a186985631eaf1.json",
+					"name" : "p6",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "stb_image::@36c20e18dd9565886a38",
+					"jsonFile" : "target-stb_image-Debug-01a0d56c9d7b1844bc0e.json",
+					"name" : "stb_image",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "uninstall::@cc21d235872243a76bd4",
+					"jsonFile" : "target-uninstall-Debug-2c33b00f6ea9ce786151.json",
+					"name" : "uninstall",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "update_mappings::@562e2781b72b6260148b",
+					"jsonFile" : "target-update_mappings-Debug-1586dc821767ccc83d0c.json",
+					"name" : "update_mappings",
+					"projectIndex" : 3
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Documents/IMAC2/S4/Maths_Proba/jeu-2-lois/cmake-build-debug",
+		"source" : "C:/Documents/IMAC2/S4/Maths_Proba/jeu-2-lois"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
