@@ -26,7 +26,6 @@ public:
     }
     inline bool isClicked(p6::Context& ctx)
     {
-        // std::cout << _canBeClicked << "\n";
         if (_canBeClicked)
         {
             if (ctx.mouse_button_is_pressed(p6::Button(0)) && mouseIsOnButton(ctx.mouse()))

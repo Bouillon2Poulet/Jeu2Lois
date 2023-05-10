@@ -1,5 +1,4 @@
 #pragma once
-// #include <corecrt_math.h>
 #include <cmath>
 #include <string>
 #include <utility>
@@ -50,7 +49,9 @@ inline std::string lawTypeToString(lawType type)
 
 inline lawType randomLawType()
 {
+    //Répartition uniforme
     // return static_cast<lawType>((int)p6::random::number((float)8));
+
     float random0_1 = p6::random::number();
     if (random0_1 < 0.2)
     {
@@ -114,7 +115,6 @@ inline int X2(const float lambda) // Poisson : automatique
         count++;
     } while (sum < 1.f);
 
-    // std::cout << count << std::endl;
     Console::addMessage(std::pair<std::string, p6::Color>("Resultat :" + std::to_string(count), p6::NamedColor::White));
     return count;
 }
@@ -291,7 +291,6 @@ inline int X8(p6::Context& ctx, Button& de, int indexCurrentCase)
 
 int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<int>& diceRolls, int indexCurrentCase, int& X6LawFailsCount, std::vector<int>& poissonLawResults)
 {
-    // Console::needToBeUpdated(true);
     Console::addMessage(std::pair<std::string, p6::Color>("Loi : " + lawTypeToString(type), p6::NamedColor::White));
 
     switch (type)
@@ -321,8 +320,6 @@ int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<in
     case lawType::discrete:
         return X8(ctx, de, indexCurrentCase);
         break;
-        // default:
-        //     return "unknown";
     }
 }
 

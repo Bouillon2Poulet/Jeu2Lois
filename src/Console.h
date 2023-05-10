@@ -55,7 +55,6 @@ public:
         glm::vec2 actualSize = (_isBig) ? _size[1] : _size[0];
         ctx.rectangle(
             p6::BottomLeftCorner(glm::vec2(ctx.aspect_ratio() / 2.f + 0.2, -0.5) - _size[0]),
-            // p6::Center(ctx.aspect_ratio() / 2.f + 0.2, -0.5),
             p6::Radii(actualSize),
             p6::Rotation()
         );

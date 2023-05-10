@@ -32,11 +32,6 @@ int main(int argc, char* argv[])
         if(map.draw(ctx)){
             map.update(ctx);
         };
-
-        // std::cout << X1(9) << std::endl;
-        // std::cout << fact(5) << std::endl;
-        // std::cout
-        //     << X2(2.5) << std::endl;
     };
 
     // Should be done last. It starts the infinite loop.

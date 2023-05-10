@@ -44,9 +44,6 @@ public:
             p6::Center(_position + glm::vec2(0, _size.y - 0.1f)),
             p6::Rotation()
         );
-        // for (const auto& currentPlayer : _players)
-        // {
-        // }
     }
 
     inline void drawPlayerWindow(p6::Context& ctx, Player player, int count, int indexCurrentPlayer)
@@ -79,7 +76,6 @@ public:
                 p6::Radius(0.05)
             );
             ctx.use_fill   = true;
-            // ctx.use_stroke = false;
         }
 
         ctx.text_size = 0.025f;
