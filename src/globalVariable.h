@@ -7,6 +7,10 @@ unsigned int MAPnbCases()
     return 78;
 }
 
+int poissonLawVariance(){
+    return 3;
+}
+
 struct Turn {
     static bool _endOfTurn;
 };

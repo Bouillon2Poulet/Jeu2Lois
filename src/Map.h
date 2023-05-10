@@ -19,11 +19,13 @@ private:
     // Button              _test;
     float _caseWidth = .17f;
     // float               _marging   = 1.f;
-    unsigned int _indexCurrentPlayer;
-    Button       _de{};
+    unsigned int         _indexCurrentPlayer;
+    Button               _de{};
+    std::pair<bool, int> _win = {false, -1};
 
-    UI      _ui{};
-    Console _console{};
+    UI               _ui{};
+    Console          _console{};
+    std::vector<int> _poissonLawResults;
 
 public:
     inline Map(const float aspectRatio)
@@ -48,41 +50,46 @@ public:
         }
     }
 
-    inline void draw(p6::Context& ctx)
+    inline bool draw(p6::Context& ctx)
     {
-        for (const auto& currentCase : _cases)
+        if (_win.first)
         {
-            currentCase.draw(ctx, _caseWidth);
+            displayVictoryScreen(ctx, _win.second, _poissonLawResults);
+            return false;
         }
 
-        bool         win         = false;
-        unsigned int playerIndex = 1;
-        for (const auto& currentPlayer : _players)
+        else
         {
-            currentPlayer.draw(ctx);
-            win = currentPlayer.hasWon();
-            if (win)
+            for (const auto& currentCase : _cases)
             {
-                displayVictoryScreen(ctx, playerIndex);
-                continue;
+                currentCase.draw(ctx, _caseWidth);
             }
-            playerIndex++;
+
+            unsigned int playerIndex = 1;
+            for (const auto& currentPlayer : _players)
+            {
+                currentPlayer.draw(ctx);
+                _win = std::pair<bool, int>(currentPlayer.hasWon(), playerIndex);
+                playerIndex++;
+            }
+
+            drawBorders(ctx);
+
+            _ui.draw(ctx, _players, _indexCurrentPlayer);
+
+            _console.draw(ctx);
+            
+            return true;
         }
-
-        drawBorders(ctx);
-
-        _ui.draw(ctx, _players, _indexCurrentPlayer);
-
-        _console.draw(ctx);
     }
 
     inline void update(p6::Context& ctx)
     {
         Console::addMessage(std::pair<std::string, p6::Color>("Tour du joueur " + std::to_string(_indexCurrentPlayer + 1) + " - ", _players[_indexCurrentPlayer].color()));
-        _players[_indexCurrentPlayer].update(ctx, _cases, _caseWidth, _de);
+        _players[_indexCurrentPlayer].update(ctx, _cases, _caseWidth, _de, _poissonLawResults);
         if (Win::_hasWin.first)
         {
-            displayVictoryScreen(ctx, Win::_hasWin.second);
+            displayVictoryScreen(ctx, Win::_hasWin.second, _poissonLawResults);
         }
         if (Turn::_endOfTurn)
         {

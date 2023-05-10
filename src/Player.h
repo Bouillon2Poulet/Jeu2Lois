@@ -52,14 +52,14 @@ public:
         );
     }
 
-    inline bool update(p6::Context& ctx, const std::vector<Case>& cases, const float caseWidth, Button& de)
+    inline bool update(p6::Context& ctx, const std::vector<Case>& cases, const float caseWidth, Button& de, std::vector<int>& poissonLawResults)
     {
         Console::addToLastMessage("Case : " + std::to_string(_indexCurrentCase));
         Case currentCase = cases[_indexCurrentCase];
         if (_movementEnded && Turn::_endOfTurn == false)
         {
-            _movement = lawTypeToFunction(ctx, de, currentCase.lawType(), _diceRolls, _indexCurrentCase, _X6LawFailsCount);
-            std::cout << "\n??mov:" << _movement;
+            _movement = lawTypeToFunction(ctx, de, currentCase.lawType(), _diceRolls, _indexCurrentCase, _X6LawFailsCount, poissonLawResults);
+            // std::cout << "\n??mov:" << _movement;
             _indexGoalCase += _movement;
         }
         Console::needToBeUpdated(false);
@@ -74,10 +74,10 @@ public:
 
     inline bool moveIfNecessary(const float caseWidth, int movement, std::vector<Case> cases)
     {
-        std::cout << "\n mov" << movement << std::endl;
+        // std::cout << "\n mov" << movement << std::endl;
         if (_indexGoalCase < 0)
         {
-            std::cout << "?!?!?<<\n";
+            // std::cout << "?!?!?<<\n";
             _indexGoalCase = 0;
         }
 
@@ -96,7 +96,7 @@ public:
         }
         if (_indexCurrentCase != _indexGoalCase)
         {
-            std::cout << movement << "//" << _indexGoalCase << "//" << _indexCurrentCase << std::endl;
+            // std::cout << movement << "//" << _indexGoalCase << "//" << _indexCurrentCase << std::endl;
             _movementEnded = false;
             if (sign(movement) > 0)
             {
@@ -122,7 +122,7 @@ public:
                 }
                 _movementEnded = true;
                 _movement      = 0;
-                std::cout << "?:?" << Turn::_endOfTurn;
+                // std::cout << "?:?" << Turn::_endOfTurn;
                 return true;
             }
         }

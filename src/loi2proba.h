@@ -1,5 +1,5 @@
 #pragma once
-//#include <corecrt_math.h>
+// #include <corecrt_math.h>
 #include <cmath>
 #include <string>
 #include <utility>
@@ -50,11 +50,44 @@ inline std::string lawTypeToString(lawType type)
 
 inline lawType randomLawType()
 {
-    return static_cast<lawType>((int)p6::random::number((float)8));
+    // return static_cast<lawType>((int)p6::random::number((float)8));
+    float random0_1 = p6::random::number();
+    if (random0_1 < 0.2)
+    {
+        return lawType::uniforme;
+    }
+    if (random0_1 < 0.4)
+    {
+        return lawType::poisson;
+    }
+    if (random0_1 < 0.5)
+    {
+        return lawType::normale;
+    }
+    if (random0_1 < 0.7)
+    {
+        return lawType::bernoulli;
+    }
+    if (random0_1 < 0.75)
+    {
+        return lawType::student;
+    }
+    if (random0_1 < 0.85)
+    {
+        return lawType::geometrique;
+    }
+    if (random0_1 < 0.90)
+    {
+        return lawType::booleenne;
+    }
+    if (random0_1 < 1){
+        return lawType::discrete;
+    }
 }
+    
 
 // LAWS
-inline int X1(p6::Context& ctx, Button& de, std::vector<int>& diceRolls)
+inline int X1(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // Uniforme : lancé de dé
 {
     Console::addMessage(std::pair<std::string, p6::Color>("Lancez le de svp", p6::NamedColor::White));
     de.draw(ctx, "de");
@@ -68,9 +101,8 @@ inline int X1(p6::Context& ctx, Button& de, std::vector<int>& diceRolls)
     return diceRolls.back();
 }
 
-inline int X2(const float lambda) // AUTO
+inline int X2(const float lambda) // Poisson : automatique
 {
-    // return exp(-lambda) * (pow(lambda, k) / fact(k)); //Première version un peu nulle
     Console::needToBeUpdated(true);
     Console::addMessage(std::pair<std::string, p6::Color>("(POISSON : AUTOMATIQUE)", p6::NamedColor::White));
 
@@ -82,36 +114,15 @@ inline int X2(const float lambda) // AUTO
         count++;
     } while (sum < 1.f);
 
-    std::cout << count << std::endl;
+    // std::cout << count << std::endl;
     Console::addMessage(std::pair<std::string, p6::Color>("Resultat :" + std::to_string(count), p6::NamedColor::White));
     return count;
 }
 
-inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // TODO : 2 lancés de dé
+inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // Normale : automatique
 {
-    /*
-    Console::addMessage(std::pair<std::string, p6::Color>("Veuillez lance 2 fois le de", p6::NamedColor::White));
-
-    de.draw(ctx, "2 de");
-    if (!de.isClicked(ctx))
-    {
-        return 0;
-    }
-    Console::needToBeUpdated(true);
-
-
-    int u1 = (p6::random::number(1, 7));
-    int u2 = (p6::random::number(1, 7));
-    diceRolls.push_back(u1);
-    Console::addMessage(std::pair<std::string, p6::Color>("Resultat 1 :" + std::to_string(diceRolls.back()), p6::NamedColor::White));
-    diceRolls.push_back(u2);
-    Console::addMessage(std::pair<std::string, p6::Color>("Resultat 2 :" + std::to_string(diceRolls.back()), p6::NamedColor::White));
-    Console::needToBeUpdated(false);
-    //return diceRolls.back();
-*/
     Console::needToBeUpdated(true);
     Console::addMessage(std::pair<std::string, p6::Color>("(NORMALE : AUTOMATIQUE)", p6::NamedColor::White));
-
 
     // Génération de deux nombres aléatoires indépendants suivant une loi uniforme sur ]0,1[
     float u1 = p6::random::number() + std::numeric_limits<float>::epsilon();
@@ -128,7 +139,7 @@ inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // TODO
     return static_cast<int>(mu + sigma * z + 0.5f); // On arrondit à l'entier le plus proche
 }
 
-inline int X4(p6::Context& ctx, Button& de) // PIECE
+inline int X4(p6::Context& ctx, Button& de) // Bernouilli : lancé de pièce
 {
     Console::addMessage(std::pair<std::string, p6::Color>("Veuillez lance la piece", p6::NamedColor::White));
 
@@ -156,7 +167,7 @@ inline int X4(p6::Context& ctx, Button& de) // PIECE
     } // le joueur recule;
 }
 
-inline int X5(const float df, const float mu, const float sigma) // AUTO
+inline int X5(const float df, const float mu, const float sigma) // Student : automatique
 {
     Console::needToBeUpdated(true);
     Console::addMessage(std::pair<std::string, p6::Color>("(STUDENT : AUTOMATIQUE)", p6::NamedColor::White));
@@ -171,7 +182,7 @@ inline int X5(const float df, const float mu, const float sigma) // AUTO
     return static_cast<int>(T);
 }
 
-inline int X6(p6::Context& ctx, Button& de, int& X6LawFailsCount) // PIECE
+inline int X6(p6::Context& ctx, Button& de, int& X6LawFailsCount) // Géométrique : lancé de pièce
 {
     float result = 0;
 
@@ -223,7 +234,7 @@ inline int X7(const std::vector<int>& diceRolls) // AUTO
     else
     {
         Console::addMessage(std::pair<std::string, p6::Color>("Echec : " + std::to_string(diceRolls.size()) + "<" + std::to_string(nbLanceMin), p6::NamedColor::White));
-        std::cout << "BOOLENNE RESULT" << -1 * (nbLanceMin / 2);
+        // std::cout << "BOOLENNE RESULT" << -1 * (nbLanceMin / 2);
         return -1 * (nbLanceMin / 2); // Le joueur recule de 5 cases -> position  - 5
     }
 }
@@ -274,12 +285,11 @@ inline int X8(p6::Context& ctx, Button& de, int indexCurrentCase)
             return i;
         }
     }
-
     // Si on ne trouve pas d'état, on recule de 5 cases
     return -5;
 }
 
-int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<int>& diceRolls, int indexCurrentCase, int& X6LawFailsCount)
+int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<int>& diceRolls, int indexCurrentCase, int& X6LawFailsCount, std::vector<int>& poissonLawResults)
 {
     // Console::needToBeUpdated(true);
     Console::addMessage(std::pair<std::string, p6::Color>("Loi : " + lawTypeToString(type), p6::NamedColor::White));
@@ -290,7 +300,8 @@ int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<in
         return X1(ctx, de, diceRolls);
         break;
     case lawType::poisson: // AUTOMATIQUE
-        return X2(3.f);
+        poissonLawResults.push_back(X2(poissonLawVariance()));
+        return poissonLawResults.back();
         break;
     case lawType::normale: // 2 lancés de dés pour la moyenne
         return X3(ctx, de, diceRolls);
@@ -299,7 +310,7 @@ int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<in
         return X4(ctx, de);
         break;
     case lawType::student:
-        return X5(10.f, 0, 3.f);
+        return X5(50.f, 0, 3.f);
         break;
     case lawType::geometrique:
         return X6(ctx, de, X6LawFailsCount);
