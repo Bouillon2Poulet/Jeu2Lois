@@ -56,15 +56,14 @@ public:
     {
         Console::addToLastMessage("Case : " + std::to_string(_indexCurrentCase));
         Case currentCase = cases[_indexCurrentCase];
-        if (_movementEnded && Turn::_endOfTurn == false)
+        if (_movementEnded && Turn::_endOfTurn == false) //Si il a fini de bouger et que ce n'est pas encore la fin de son tour
         {
+            //Le mouvement est égal à ce que nous retourne la loi de probabilité
             _movement = lawTypeToFunction(ctx, de, currentCase.lawType(), _diceRolls, _indexCurrentCase, _X6LawFailsCount, poissonLawResults);
-            // std::cout << "\n??mov:" << _movement;
-            _indexGoalCase += _movement;
+            _indexGoalCase += _movement; //La case cible s'incrémente du résultat de la loi
         }
         Console::needToBeUpdated(false);
-        // int movement = _diceRolls.empty() ? 0 : _diceRolls.back();
-        return moveIfNecessary(caseWidth, _movement, cases);
+        return moveIfNecessary(caseWidth, _movement, cases); //Si il y a eu un changement dans la case cible, on bouge
     }
 
     inline void indexGoalCaseIncr(const int movement)
@@ -74,29 +73,25 @@ public:
 
     inline bool moveIfNecessary(const float caseWidth, int movement, std::vector<Case> cases)
     {
-        // std::cout << "\n mov" << movement << std::endl;
-        if (_indexGoalCase < 0)
+        if (_indexGoalCase < 0) //Si le joueur dépasse le début de la carte
         {
-            // std::cout << "?!?!?<<\n";
             _indexGoalCase = 0;
         }
-
-        if (movement == 0)
+        if (movement == 0) //Si on ne bouge pas
         {
             return false;
         }
-        if (_indexGoalCase >= MAPnbCases())
+        if (_indexGoalCase >= MAPnbCases()) //Si le joueur dépasse la fin de la carte
         {
             _indexGoalCase = MAPnbCases() - 1;
         }
-        if (_indexCurrentCase == MAPnbCases() - 1) // Win
+        if (_indexCurrentCase == MAPnbCases() - 1) // Si le joueur gagne
         {
             Win::_hasWin = std::pair<bool, int>(true, _indexPlayer);
             return false;
         }
-        if (_indexCurrentCase != _indexGoalCase)
+        if (_indexCurrentCase != _indexGoalCase) //Si il y a une différence entre la case actuelle du joueur et sa case cible, on le déplace
         {
-            // std::cout << movement << "//" << _indexGoalCase << "//" << _indexCurrentCase << std::endl;
             _movementEnded = false;
             if (sign(movement) > 0)
             {
@@ -109,20 +104,18 @@ public:
                 _position -= glm::vec2(caseWidth * indexToVector(index));
                 _indexCurrentCase--;
             }
-            if (_indexCurrentCase == _indexGoalCase)
+            if (_indexCurrentCase == _indexGoalCase) //La case sur laquelle finit le joueur est-elle automatique ?
             {
                 Console::needToBeUpdated(true);
                 Console::addMessage(std::pair<std::string, p6::Color>("Case " + std::to_string(_indexCurrentCase - movement) + " -> Case " + std::to_string(_indexGoalCase), p6::NamedColor::White));
                 Turn::_endOfTurn = lawTypeToEndOfTurn(cases[_indexCurrentCase].lawType());
                 if (Turn::_endOfTurn == false)
                 {
-                    // Console::deleteLastMessage();
-                    // Console::addToLastMessage("AUTOMATIQUE");
+
                     Console::needToBeUpdated(false);
                 }
                 _movementEnded = true;
                 _movement      = 0;
-                // std::cout << "?:?" << Turn::_endOfTurn;
                 return true;
             }
         }

@@ -52,6 +52,7 @@ inline lawType randomLawType()
     //Répartition uniforme
     // return static_cast<lawType>((int)p6::random::number((float)8));
 
+    //Répartition pondérée
     float random0_1 = p6::random::number();
     if (random0_1 < 0.2)
     {
@@ -119,7 +120,7 @@ inline int X2(const float lambda) // Poisson : automatique
     return count;
 }
 
-inline int X3(p6::Context& ctx, Button& de, std::vector<int>& diceRolls) // Normale : automatique
+inline int X3() // Normale : automatique
 {
     Console::needToBeUpdated(true);
     Console::addMessage(std::pair<std::string, p6::Color>("(NORMALE : AUTOMATIQUE)", p6::NamedColor::White));
@@ -242,14 +243,14 @@ inline int X7(const std::vector<int>& diceRolls) // AUTO
 inline int X8(p6::Context& ctx, Button& de, int indexCurrentCase)
 {
     std::vector<std::vector<double>> transitionMatrix = {
-        {0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0, 0},
-        {0.2, 0.2, 0.2, 0.2, 0, 0.2, 0, 0, 0, 0},
-        {0.2, 0.2, 0.2, 0, 0, 0, 0, 0, 0.2, 0.2},
-        {0.2, 0.2, 0, 0, 0, 0, 0, 0, 0.2, 0.4},
-        {0.2, 0, 0, 0, 0, 0, 0, 0, 0.4, 0.4},
-        {0, 0, 0.2, 0, 0, 0, 0, 0, 0.4, 0.4},
-        {0, 0, 0, 0.2, 0, 0, 0.2, 0, 0, 0.6},
-        {0, 0, 0, 0.2, 0, 0.2, 0.2, 0, 0, 0.4}};
+        {0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0},
+        {0.2, 0.2, 0.2, 0.2, 0, 0.2, 0, 0, 0},
+        {0.2, 0.2, 0.2, 0, 0, 0, 0, 0.2, 0.2},
+        {0.2, 0.2, 0, 0, 0, 0, 0, 0.2, 0.4},
+        {0.2, 0, 0, 0, 0, 0, 0, 0.4, 0.4},
+        {0, 0, 0.2, 0, 0, 0, 0, 0.4, 0.4},
+        {0, 0, 0.2, 0, 0, 0.2, 0, 0, 0.6}
+        };
 
     // On récupère la probabilité de chaque événement possible
 
@@ -291,19 +292,20 @@ inline int X8(p6::Context& ctx, Button& de, int indexCurrentCase)
 
 int lawTypeToFunction(p6::Context& ctx, Button& de, lawType type, std::vector<int>& diceRolls, int indexCurrentCase, int& X6LawFailsCount, std::vector<int>& poissonLawResults)
 {
+    //La fonction relie l'index de la case à une loi de probabilité, elle renvoie 0 tant que le joueur n'a pas joué
     Console::addMessage(std::pair<std::string, p6::Color>("Loi : " + lawTypeToString(type), p6::NamedColor::White));
 
     switch (type)
     {
-    case lawType::uniforme: // DÉ
+    case lawType::uniforme:
         return X1(ctx, de, diceRolls);
         break;
-    case lawType::poisson: // AUTOMATIQUE
+    case lawType::poisson:
         poissonLawResults.push_back(X2(poissonLawVariance()));
         return poissonLawResults.back();
         break;
-    case lawType::normale: // 2 lancés de dés pour la moyenne
-        return X3(ctx, de, diceRolls);
+    case lawType::normale:
+        return X3();
         break;
     case lawType::bernoulli:
         return X4(ctx, de);

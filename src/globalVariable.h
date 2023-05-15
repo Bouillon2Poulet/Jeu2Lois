@@ -4,7 +4,7 @@
 
 unsigned int MAPnbCases()
 {
-    return 78;
+    return 81;
 }
 
 int poissonLawVariance(){

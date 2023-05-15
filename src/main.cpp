@@ -25,12 +25,12 @@ int main(int argc, char* argv[])
 
     p6::Image IMGgoose = p6::load_image("img/goosegame.jpeg");
 
-    // Declare your infinite update loop.
+    // Boucle de rendu
     ctx.update = [&]() {
-        ctx.background(p6::Color(39.f/255.f, 110.f/255.f, 188.F/255.f));
-        ctx.image(IMGgoose, p6::Center(-ctx.aspect_ratio() / 2.8f, 0.05), p6::RadiusX(p6::RadiusX().value - 0.2f), p6::Rotation());
-        if(map.draw(ctx)){
-            map.update(ctx);
+        ctx.background(p6::Color(39.f/255.f, 110.f/255.f, 188.f/255.f)); //Fond
+        ctx.image(IMGgoose, p6::Center(-0.52f, -0.05), p6::RadiusX(p6::RadiusX().value - 0.2f), p6::Rotation()); //Image
+        if(map.draw(ctx)){ //Dessin de la carte
+            map.update(ctx); //Mis à jour de la carte
         };
     };
 

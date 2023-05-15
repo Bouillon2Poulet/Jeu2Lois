@@ -61,9 +61,13 @@ glm::vec2 indexToVector(unsigned int index)
     {
         return glm::vec2(0.f, 1.f);
     }
-    if (index < 78)
+    if (index < 79)
     {
         return glm::vec2(-1.f, 0.f);
+    }
+    if (index <= 80)
+    {
+        return glm::vec2(0.f, -1.f);
     }
 }
 
